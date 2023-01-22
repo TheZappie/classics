@@ -18,7 +18,7 @@ dic = {'Azzam': 'Don Santosa',
        'Jurriaan': 'Jur',
        'Jochem': 'Ham',
        }
-
+n = len(dic.keys())
 dic2 = {'Ja': True,
         'Nee': False,
         'Weet ik niet': True}
@@ -41,14 +41,17 @@ def func(arg):
     print(f'{arg.name}: {round(portion * 100)} %')
 
 
-print("Percentage op je eigen nummers gestemd")
+def func2(arg):
+    votes = arg[arg.name]
+    portion = votes.sum() / len(arg)
+    return (f'{round(portion * 100)} %')
 
+
+print("Percentage op je eigen nummers gestemd")
 df.groupby(TOEGEVOEGD_DOOR, group_keys=True).apply(func)
 
-print("Aantal nummers toegevoegd:")
+consistentie = df.groupby(TOEGEVOEGD_DOOR, group_keys=True).apply(func2)
 number_of_songs_added = df[TOEGEVOEGD_DOOR].value_counts()
-print(number_of_songs_added.head())
-
 total_votes = df.set_index(SONG_NAME)[dic.keys()].sum(axis=1)
 toegevoegd_door = df.set_index(SONG_NAME)[TOEGEVOEGD_DOOR]
 total_votes.groupby(toegevoegd_door).mean()
@@ -58,20 +61,26 @@ score = total_votes.groupby(toegevoegd_door).mean().round(1).sort_values(ascendi
 
 number_of_instant_classics = (total_votes >= 7).groupby(toegevoegd_door).sum()
 
+
 def f(x):
     if isinstance(x, str):
         return x
     else:
         return x[0]
+
+
 favorite_artisten = artists.groupby(toegevoegd_door).agg(pd.Series.mode)
 favorite_artisten = favorite_artisten.map(f)
 
-result = pd.DataFrame({"Aantal nummers ingebracht": number_of_songs_added,
-                       "Score": score,
-                       "Aantal instant classics": number_of_instant_classics,
-                       "Favorite Artiest": favorite_artisten}
+result = pd.DataFrame({"Aantal instant classics": number_of_instant_classics,
+                       "Aantal nummers ingebracht": number_of_songs_added,
+                       f"Gemiddelde rating (0-{n})": score,
+                       "Favorite Artiest": favorite_artisten,
+                       "Consistent": consistentie}
                       ).sort_values("Aantal instant classics", ascending=False)
 result.index.name = 'Naam'
+result.to_markdown('results.md')
+
 
 writer = pd.ExcelWriter('Results.xlsx', engine='xlsxwriter', )
 result.to_excel(writer, sheet_name=SHEET_NAME)
@@ -84,7 +93,7 @@ worksheet = writer.sheets[SHEET_NAME]
 (max_row, max_col) = result.shape
 
 # Apply a conditional format to the required cell range.
-for i in range(1, max_col+1):
+for i in range(1, max_col + 1):
     worksheet.conditional_format(1, i, max_row, i,
                                  {'type': '3_color_scale'})
 
