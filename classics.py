@@ -1,5 +1,9 @@
+from pathlib import Path
+
 import pandas as pd
 import itertools as it
+
+ARTIESTEN_RESULTATEN = 'Artiesten_Resultaten'
 
 SHEET_NAME = 'Uitslagen'
 
@@ -79,23 +83,40 @@ result = pd.DataFrame({"Aantal instant classics": number_of_instant_classics,
                        "Consistent": consistentie}
                       ).sort_values("Aantal instant classics", ascending=False)
 result.index.name = 'Naam'
-result.to_markdown('results.md')
 
 
-writer = pd.ExcelWriter('Results.xlsx', engine='xlsxwriter', )
+artist_inbrengen = artists.value_counts()
+artist_rating = total_votes.groupby(artists).mean()
+artist_results = pd.DataFrame({"Aantal nummers ingebracht": artist_inbrengen,
+                               f"Gemiddelde rating (0-{n})": artist_rating},
+                              )
+#
+
+path = 'Results'
+
+path = Path(path)
+result.to_markdown(path.with_suffix('.md'))
+writer = pd.ExcelWriter(path.with_suffix('.xlsx'), engine='xlsxwriter', )
 result.to_excel(writer, sheet_name=SHEET_NAME)
-
 # Get the xlsxwriter workbook and worksheet objects.
 workbook = writer.book
 worksheet = writer.sheets[SHEET_NAME]
-
 # Get the dimensions of the dataframe.
 (max_row, max_col) = result.shape
-
 # Apply a conditional format to the required cell range.
 for i in range(1, max_col + 1):
     worksheet.conditional_format(1, i, max_row, i,
                                  {'type': '3_color_scale'})
 
-# Close the Pandas Excel writer and output the Excel file.
+artist_results.to_excel(writer, sheet_name=ARTIESTEN_RESULTATEN)
+worksheet = writer.sheets[ARTIESTEN_RESULTATEN]
+(max_row, max_col) = result.shape
+# Apply a conditional format to the required cell range.
+for i in range(1, max_col + 1):
+    worksheet.conditional_format(1, i, max_row, i,
+                                 {'type': '3_color_scale'})
 writer.close()
+
+
+
+
