@@ -11,7 +11,7 @@ TOEGEVOEGD_DOOR = 'Toegevoegd door'
 
 SONG_NAME = 'Song Name'
 
-p = r"Classics verkiezingen 2022 correctie.xlsx"
+p = r"2022.xlsx"
 dic = {'Azzam': 'Don Santosa',
        'Victor': 'Victor',
        'Jelle': 'Anoniempje',
@@ -90,7 +90,7 @@ artist_rating = total_votes.groupby(artists).mean()
 artist_results = pd.DataFrame({"Aantal nummers ingebracht": artist_inbrengen,
                                f"Gemiddelde rating (0-{n})": artist_rating},
                               )
-#
+artist_results = artist_results.sort_values(f"Aantal nummers ingebracht", ascending=False)
 
 path = 'Results'
 
@@ -110,7 +110,7 @@ for i in range(1, max_col + 1):
 
 artist_results.to_excel(writer, sheet_name=ARTIESTEN_RESULTATEN)
 worksheet = writer.sheets[ARTIESTEN_RESULTATEN]
-(max_row, max_col) = result.shape
+(max_row, max_col) = artist_results.shape
 # Apply a conditional format to the required cell range.
 for i in range(1, max_col + 1):
     worksheet.conditional_format(1, i, max_row, i,
