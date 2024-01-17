@@ -9,6 +9,7 @@ ARTIESTEN_RESULTATEN = 'Artiesten_Resultaten'
 SHEET_NAME = 'Uitslagen'
 TOEGEVOEGD_DOOR = 'Added By'
 SONG_NAME = 'Track Name'
+ARTIEST = 'Artist Name(s)'
 
 data_path = r"data/2023.xlsx"
 path_results = 'Results2023'
@@ -35,8 +36,7 @@ converters = {i: lambda x: dic2[x] for i in naming_2023.values()}
 df = pd.read_excel(data_path, dtype=dtype, converters=converters, index_col=0)
 df.rename(columns={v: i for i, v in naming_2023.items()}, inplace=True)
 
-ARTIEST = 'Artiest'
-df[[ARTIEST, SONG_NAME]] = df[SONG_NAME].str.strip('[]').str.split(' - ', n=1, expand=True)
+# df[[ARTIEST, SONG_NAME]] = df[SONG_NAME].str.strip('[]').str.split(' - ', n=1, expand=True)
 artists = df.set_index(SONG_NAME)[ARTIEST]
 df = df[[SONG_NAME, TOEGEVOEGD_DOOR] + list(naming_2023.keys())]
 
