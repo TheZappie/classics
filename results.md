@@ -1,11 +1,11 @@
-| Naam     |   Aantal instant classics |   Aantal nummers ingebracht |   Gemiddelde rating (0-9) | Favorite Artiest                        | Consistent   |
-|:---------|--------------------------:|----------------------------:|--------------------------:|:----------------------------------------|:-------------|
-| Jelle    |                         6 |                         115 |                       2.9 | Vieze Asbak                             | 81 %         |
-| Azzam    |                         3 |                         118 |                       2.2 | Loza Alexander                          | 46 %         |
-| Timo     |                         2 |                          47 |                       3.4 | Cadeautje voor jou                      | 60 %         |
-| Jurriaan |                         1 |                          35 |                       3.1 | gladde paling                           | 49 %         |
-| Kjeld    |                         1 |                          11 |                       3.7 | Beedle The Bardcore                     | 91 %         |
-| Long     |                         1 |                          34 |                       2.9 | Koninklijk Utrechtsch Studenten Tooneel | 76 %         |
-| Tijmen   |                         1 |                          52 |                       2.7 | Gotu Jim                                | 54 %         |
-| Victor   |                         1 |                           2 |                       4.5 | Klein Orkest                            | 50 %         |
-| Jochem   |                         0 |                           2 |                       5.5 | Grant Macdonald                         | 100 %        |
+| Naam     |   Aantal instant classics |   Aantal nummers ingebracht |   Gemiddelde rating (0-8) | Favorite Artiest      | Consistent   |
+|:---------|--------------------------:|----------------------------:|--------------------------:|:----------------------|:-------------|
+| Jelle    |                         6 |                         170 |                       2.5 | Banger Hart           | 94 %         |
+| Azzam    |                         2 |                         106 |                       2.2 | 300 PS (... Auto)     | 66 %         |
+| Jurriaan |                         2 |                          62 |                       2.9 | Altijd Blijven Gassen | 63 %         |
+| Jochem   |                         1 |                           8 |                       4.2 | Het Fluitlied         | 100 %        |
+| Timo     |                         1 |                         126 |                       3   | Barbie Girl           | 62 %         |
+| Kjeld    |                         0 |                           9 |                       2.6 | Belle Hélène          |              |
+| Long     |                         0 |                          29 |                       2.6 | Trump 2024            | 45 %         |
+| Tijmen   |                         0 |                          39 |                       2.4 | Huisje Op Wielen      | 72 %         |
+| Victor   |                         0 |                           6 |                       4   | De Toreador           | 67 %         |

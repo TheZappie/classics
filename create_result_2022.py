@@ -116,7 +116,3 @@ for i in range(1, max_col + 1):
     worksheet.conditional_format(1, i, max_row, i,
                                  {'type': '3_color_scale'})
 writer.close()
-
-
-
-
